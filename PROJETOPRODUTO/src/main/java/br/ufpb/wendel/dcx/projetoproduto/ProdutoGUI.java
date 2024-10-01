@@ -4,16 +4,27 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ProdutoGUI {
+public class ProdutoGUI extends JFrame {
     public ProdutoGUI() {
-        // Cria o JFrame
-        JFrame box = new JFrame();
-        box.setTitle("Sistema de Produtos");
-        box.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        box.setSize(500, 500);
-        box.setLayout(new BorderLayout());
+        // Configurações do JFrame
+        setTitle("Sistema de Produtos");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500, 500);
+        setLocationRelativeTo(null); // Centraliza na tela
+        setLayout(new BorderLayout());
 
-        // Cria a barra de menu
+        // Cria e adiciona a barra de menu
+        setJMenuBar(criarMenu());
+
+        // Cria e adiciona o painel central
+        JPanel painelCentral = criarPainelCentral();
+        add(painelCentral, BorderLayout.CENTER);
+
+        // Torna o JFrame visível
+        setVisible(true);
+    }
+
+    private JMenuBar criarMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menuArq = new JMenu("Produtos");
         menuBar.add(menuArq);
@@ -21,61 +32,46 @@ public class ProdutoGUI {
         // Cria itens de menu
         JMenuItem menuItemAdicionar = new JMenuItem("Adicionar");
         JMenuItem menuItemPesquisar = new JMenuItem("Pesquisar");
+        JMenuItem menuItemRemover = new JMenuItem("Remover");
         JMenuItem menuItemSair = new JMenuItem("Sair");
 
         // Adiciona ações aos itens de menu
-        menuItemAdicionar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mostrarOpcao("Adicionar Produto");
-            }
-        });
-
-        menuItemPesquisar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mostrarOpcao("Pesquisar Produto");
-            }
-        });
-
-        menuItemSair.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        menuItemAdicionar.addActionListener(e -> mostrarOpcao("Adicionar Produto"));
+        menuItemPesquisar.addActionListener(e -> mostrarOpcao("Pesquisar Produto"));
+        menuItemRemover.addActionListener(e -> mostrarOpcao("Remover Produto"));
+        menuItemSair.addActionListener(e -> System.exit(0));
 
         // Adiciona os itens ao menu
         menuArq.add(menuItemAdicionar);
         menuArq.add(menuItemPesquisar);
+        menuArq.add(menuItemRemover); // Adicionado aqui
         menuArq.addSeparator();
         menuArq.add(menuItemSair);
 
-        // Adiciona a barra de menu ao JFrame
-        box.setJMenuBar(menuBar);
+        return menuBar;
+    }
 
-        // Cria um painel central
+    private JPanel criarPainelCentral() {
         JPanel painelCentral = new JPanel();
         painelCentral.setLayout(new GridBagLayout());
 
         // Cria botões no centro
         JButton btnAdicionar = new JButton("Adicionar Produto");
         JButton btnPesquisar = new JButton("Pesquisar Produto");
+        JButton btnRemover = new JButton("Remover Produto"); // Novo botão
 
         btnAdicionar.addActionListener(e -> mostrarOpcao("Adicionar Produto"));
         btnPesquisar.addActionListener(e -> mostrarOpcao("Pesquisar Produto"));
+        btnRemover.addActionListener(e -> mostrarOpcao("Remover Produto")); // Ação para o novo botão
 
         painelCentral.add(btnAdicionar);
         painelCentral.add(btnPesquisar);
+        painelCentral.add(btnRemover); // Adicionado aqui
 
-        // Adiciona o painel central ao JFrame
-        box.add(painelCentral, BorderLayout.CENTER);
-
-        // Torna o JFrame visível
-        box.setVisible(true);
+        return painelCentral;
     }
 
     private void mostrarOpcao(String mensagem) {
-        JOptionPane.showMessageDialog(null, mensagem);
+        JOptionPane.showMessageDialog(this, mensagem);
     }
 }
