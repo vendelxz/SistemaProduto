@@ -63,7 +63,7 @@ public class ProdutoGUI extends JFrame {
         // Cria botões no centro
         JButton btnAdicionar = new JButton("Adicionar Produto");
         JButton btnPesquisar = new JButton("Pesquisar Produto");
-        JButton btnRemover = new JButton("Remover Produto"); // Novo botão
+        JButton btnRemover = new JButton("Remover Produto");
 
         btnAdicionar.addActionListener(e -> adicionarProduto());
         btnPesquisar.addActionListener(e -> pesquisarProduto());
@@ -71,7 +71,7 @@ public class ProdutoGUI extends JFrame {
 
         painelCentral.add(btnAdicionar);
         painelCentral.add(btnPesquisar);
-        painelCentral.add(btnRemover); // Adicionado aqui
+        painelCentral.add(btnRemover);
 
         return painelCentral;
     }
