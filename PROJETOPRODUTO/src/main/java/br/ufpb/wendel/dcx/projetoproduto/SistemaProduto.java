@@ -14,10 +14,10 @@ public class SistemaProduto implements ProductInterface {
         if (p.getDescricao().equals(descricao)){
             throw new  ProdutoExistenteException("O produto já existe");
         }
+    }
         Produto p1 = new Produto(nome, tipo, descricao);
         produtos.put(descricao, p1);
 
-    }
 
     }
 
